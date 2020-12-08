@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snapper/Pages/LoginPage/loginPage.dart';
+import 'package:snapper/Pages/WelcomePage/welcomePage.dart';
 
 import 'Pallete.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Avenier',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      home: Welcome(),
     );
   }
 }

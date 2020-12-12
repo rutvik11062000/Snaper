@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snapper/Pages/LoginPage/loginPage.dart';
+import 'package:snapper/Pages/SignUpPage/signUpPage.dart';
 import 'package:snapper/Pages/WelcomePage/welcomePage.dart';
 
 import 'Pallete.dart';

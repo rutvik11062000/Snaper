@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
     @required this.bgColor,
     @required this.content,
     @required this.txtColor,
+    this.function,
     this.width,
   }) : super(key: key);
 
@@ -15,6 +16,7 @@ class CustomButton extends StatelessWidget {
   final String content;
   final Color txtColor;
   final double width;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,10 @@ class CustomButton extends StatelessWidget {
       shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(30.0)),
       color: bgColor,
-      onPressed: () {},
+      onPressed: function ?? () {},
       child: Container(
         width: width ?? 90.0,
+        height: 48.0,
         child: Center(
           child: Text(
             content,

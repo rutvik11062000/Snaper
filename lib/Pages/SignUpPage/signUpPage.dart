@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:snapper/Pallete.dart';
 import 'package:snapper/UI/shared/CustomButton.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  const SignUp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +21,13 @@ class Login extends StatelessWidget {
                 icon: Icon(
                   Icons.arrow_back_ios_rounded,
                   size: 18.0,
-                  color: Colors.black87,
+                  color: Colors.grey,
                 ),
               ),
               Expanded(
                 child: Center(
                   child: Container(
-                    height: 250,
+                    height: 300,
                     width: MediaQuery.of(context).size.width,
                     // color: Colors.green,
                     child: Column(
@@ -35,7 +35,7 @@ class Login extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            "Log In",
+                            "What's your name?",
                             style: TextStyle(
                               fontSize: 25.0,
                               fontWeight: FontWeight.w800,
@@ -49,11 +49,11 @@ class Login extends StatelessWidget {
                             cursorColor: Colors.green,
                             cursorWidth: 3.0,
                             decoration: InputDecoration(
-                              labelText: "USER NAME OR EMAIL",
+                              labelText: "First Name",
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always,
                               labelStyle:
-                                  TextStyle(color: blue, fontSize: 13.0),
+                                  TextStyle(color: blue, fontSize: 16.0),
                               focusColor: black,
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: black),
@@ -65,24 +65,24 @@ class Login extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 40.0, vertical: 10.0),
                           child: TextField(
-                            obscureText: true,
+                            // obscureText: true,
                             // obscuringCharacter: "*",
                             cursorColor: Colors.green,
                             cursorWidth: 3.0,
                             decoration: InputDecoration(
-                              labelText: "PASSWORD",
+                              labelText: "LastName",
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always,
                               labelStyle:
-                                  TextStyle(color: blue, fontSize: 13.0),
+                                  TextStyle(color: blue, fontSize: 16.0),
                               focusColor: black,
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: black),
                               ),
-                              suffixIcon: Icon(
-                                Icons.lock,
-                                color: Colors.grey,
-                              ),
+                              // suffixIcon: Icon(
+                              //   Icons.lock,
+                              //   color: Colors.grey,
+                              // ),
                             ),
                           ),
                         ),
@@ -90,9 +90,33 @@ class Login extends StatelessWidget {
                           height: 10.0,
                         ),
                         Center(
-                          child: Text(
-                            "Forgot your password?",
-                            style: TextStyle(color: blue),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40.0, vertical: 10.0),
+                            // child: Text(
+                            //   "By tapping 'Sign Up & Accept', you acknowledge that you have read the Privacy Policy and agree to the Terms of Services ",
+                            //   style: TextStyle(color: Colors.grey),
+                            // ),
+                            child: Text.rich(
+                              TextSpan(
+                                text:
+                                    'By tapping "Sign Up & Accept", you acknowledge that you have read the ',
+                                style: TextStyle(fontSize: 12.0),
+                                children: <InlineSpan>[
+                                  TextSpan(
+                                    text: 'Privacy Policy',
+                                    style: TextStyle(color: blue),
+                                  ),
+                                  TextSpan(
+                                    text: ' and agree to the ',
+                                  ),
+                                  TextSpan(
+                                    text: 'Terms of Services',
+                                    style: TextStyle(color: blue),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -106,7 +130,7 @@ class Login extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 20.0),
                   child: CustomButton(
                       bgColor: Colors.blue,
-                      content: "Log In",
+                      content: "Sign Up & Accept",
                       txtColor: white,
                       width: 200),
                 ),

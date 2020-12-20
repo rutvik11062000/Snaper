@@ -1,11 +1,19 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:snapper/Pages/LoginPage/loginPage.dart';
-import 'package:snapper/Pages/SignUpPage/signUpPage.dart';
-import 'package:snapper/Pages/WelcomePage/welcomePage.dart';
+import 'package:snapper/Pages/mainPage.dart';
 
 import 'Pallete.dart';
 
-void main() {
+CameraDescription firstCamera;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  // Get a specific camera from the list of available cameras.
+  firstCamera = cameras.first;
   runApp(MyApp());
 }
 
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Avenier',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Welcome(),
+      home: MainPage(),
     );
   }
 }

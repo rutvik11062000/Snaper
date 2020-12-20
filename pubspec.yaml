@@ -23,8 +23,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  camera: ^0.5.8+17
   cupertino_icons: ^1.0.1
   flutter_svg: ^0.19.2+1
+  path: ^1.7.0
+  path_provider: ^1.6.24
 
 dev_dependencies:
   flutter_test:
@@ -43,7 +46,6 @@ flutter:
   assets:
     - svg/snapchat-logo.svg
     - svg/icons8-snapchat.svg
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

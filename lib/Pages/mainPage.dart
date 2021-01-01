@@ -14,14 +14,11 @@ class _MainPageState extends State<MainPage> {
   int _page = 0;
   PageController _c;
   // C
-  List<CameraDescription> cameras;
-  CameraDescription firstCamera;
-  CameraController _controller;
-  Future<void> _initializeControllerFuture;
 
   @override
   void initState() {
     _c = new PageController(
+      keepPage: true,
       initialPage: _page,
     );
 
@@ -41,8 +38,8 @@ class _MainPageState extends State<MainPage> {
         currentIndex: _page,
         onTap: (index) {
           this._c.animateToPage(index,
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.linear);
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOutSine);
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -69,39 +66,65 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircleAvatar(
-                // backgroundColor: Colors.red,
-                child: Icon(Icons.person),
-              ),
-              CircleAvatar(
-                // backgroundColor: Colors.red,
-                child: Icon(Icons.search),
-              ),
-            ],
-          ),
-          PageView(
-            controller: _c,
-            onPageChanged: (newPage) {
-              setState(() {
-                this._page = newPage;
-              });
-            },
-            children: <Widget>[
-              Map(),
-              Chats(),
-              Camera(),
-              Stories(),
-              Discovery(),
-            ],
-          ),
+      body: PageView(
+        controller: _c,
+        // itemCount: 5,
+        onPageChanged: (newPage) {
+          setState(() {
+            this._page = newPage;
+          });
+        },
+        children: <Widget>[
+          Map(),
+          Chats(),
+          Camera(),
+          Stories(),
+          Discovery(),
         ],
       ),
     );
+  }
+
+  Widget pageTransition(int idx) {
+    return AnimatedBuilder(
+      animation: _c,
+      builder: (BuildContext context, Widget child) {
+        double value = 1;
+        if (_c.position.hasContentDimensions) {
+          value = _c.page - idx;
+          value = (1 - (value.abs() * 0.25)).clamp(0.0, 0.1);
+        }
+        return Center(
+          child: SizedBox(
+            height: Curves.easeInOut.transform(value) * 400,
+            child: widget,
+          ),
+        );
+      },
+      child: getPage(idx),
+    );
+  }
+
+  Widget getPage(int idx) {
+    switch (idx) {
+      case 0:
+        return Map();
+        break;
+      case 1:
+        return Chats();
+        break;
+      case 2:
+        return Camera();
+        break;
+      case 3:
+        return Stories();
+        break;
+      case 4:
+        return Discovery();
+        break;
+      default:
+        return Camera();
+    }
   }
 
   Color _getColor() {

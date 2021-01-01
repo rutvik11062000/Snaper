@@ -1,19 +1,17 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:snapper/Pages/mainPage.dart';
+import 'Pages/MainPages/camera.dart';
 
 import 'Pallete.dart';
 
-CameraDescription firstCamera;
-
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Obtain a list of the available cameras on the device.
-  final cameras = await availableCameras();
-
-  // Get a specific camera from the list of available cameras.
-  firstCamera = cameras.first;
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    logError(e.code, e.description);
+  }
   runApp(MyApp());
 }
 

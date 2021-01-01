@@ -26,6 +26,7 @@ dependencies:
   camera: ^0.5.8+17
   cupertino_icons: ^1.0.1
   flutter_svg: ^0.19.2+1
+  font_awesome_flutter: ^8.11.0
   path: ^1.7.0
   path_provider: ^1.6.24
 
@@ -62,6 +63,9 @@ flutter:
         - asset: fonts/avenier_book.ttf
         - asset: fonts/avenier_black.ttf
           weight: 800
+        - asset: fonts/avenier_medium.ttf # avenier_medium.ttf
+          weight: 600
+        # avenier_medium.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

@@ -6,17 +6,23 @@ class BuildOpacityButton extends StatelessWidget {
   const BuildOpacityButton({
     Key key,
     @required this.iconData,
+    this.color,
   }) : super(key: key);
 
   final IconData iconData;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: Colors.transparent.withOpacity(.3),
-      child: Icon(
-        iconData,
-        color: white,
+      radius: 18.0,
+      backgroundColor: Colors.transparent.withOpacity(.12),
+      child: Center(
+        child: Icon(
+          iconData,
+          color: color ?? white,
+          size: 18,
+        ),
       ),
     );
   }

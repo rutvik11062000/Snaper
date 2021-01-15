@@ -21,7 +21,7 @@ class BuildOpacityButton extends StatelessWidget {
         child: Icon(
           iconData,
           color: color ?? white,
-          size: 18,
+          size: 22,
         ),
       ),
     );

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "284922823951",
+    "project_id": "snaper-301810",
+    "storage_bucket": "snaper-301810.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284922823951:android:076efc1a4e82ea7c1e6a7a",
+        "android_client_info": {
+          "package_name": "com.example.snapper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284922823951-5cso0gccrosb1ib7s8ll2dmh3bcjqkpu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.snapper",
+            "certificate_hash": "948f1af814718f7e9acf48c18fcb7cd8a9153c9e"
+          }
+        },
+        {
+          "client_id": "284922823951-stcd67sa9qav2fpu4o880mtag5ars0qs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH4XeqCR-jm8XnndPaQ9YKAik23TUZi_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284922823951-stcd67sa9qav2fpu4o880mtag5ars0qs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

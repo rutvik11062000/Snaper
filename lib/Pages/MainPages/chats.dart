@@ -13,38 +13,48 @@ class Chats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TopPaddingComponent(child: ChatComponent());
-  }
-}
-
-class ChatComponent extends StatelessWidget {
-  const ChatComponent({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ChatAppBar(),
-        Expanded(
-          child: ListView.separated(
-            physics: BouncingScrollPhysics(),
-            separatorBuilder: (BuildContext context, int index) {
-              return Divider(
-                height: 1,
-                color: Colors.black12,
-              );
-            },
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) {
-              return ChatListTile(
-                status: "videoSnapReceived",
-              );
-            },
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            forceElevated: false,
+            leadingWidth: 100.0,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: AppBarConstWidget(
+                specificColor: loadingColor,
+              ),
+            ),
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            title: Text(
+              "Chat",
+              style: TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            elevation: 1.0,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: TrailingAppBarChat(),
+              ),
+            ],
           ),
-        ),
-      ],
+          SliverFixedExtentList(
+            itemExtent: 70.0, // I'm forcing item heights
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => ChatListTile(
+                status: 'videoSnapReceived',
+              ),
+              childCount: 10,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -98,38 +108,6 @@ class ChatListTile extends StatelessWidget {
   }
 }
 
-class ChatAppBar extends StatelessWidget {
-  const ChatAppBar({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            AppBarConstWidget(
-              specificColor: loadingColor,
-            ),
-            Text(
-              "Chat",
-              style: TextStyle(
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TrailingAppBarChat()
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class TrailingAppBarChat extends StatelessWidget {
   const TrailingAppBarChat({
     Key key,
@@ -148,6 +126,7 @@ class TrailingAppBarChat extends StatelessWidget {
           iconData: Icons.chat_bubble_rounded,
           color: Colors.black45,
         ),
+        hspace10,
       ],
     );
   }

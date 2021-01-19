@@ -1,5 +1,5 @@
 export './camera.dart';
-export './chats.dart';
+export 'ChatScreen/chats.dart';
 export './map.dart';
 export './stories.dart';
 export './discovery.dart';

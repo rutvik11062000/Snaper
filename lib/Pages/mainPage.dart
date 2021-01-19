@@ -11,7 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _page = 0;
+  int _page = 1;
   PageController _c;
   // C
 
@@ -67,6 +67,7 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
       body: PageView(
+        physics: new NeverScrollableScrollPhysics(),
         controller: _c,
         // itemCount: 5,
         onPageChanged: (newPage) {

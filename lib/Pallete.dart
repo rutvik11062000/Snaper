@@ -15,3 +15,8 @@ const SizedBox hspace5 = SizedBox(
 const SizedBox hspace10 = SizedBox(
   width: 10.0,
 );
+
+TextStyle titleHeading = TextStyle(
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+);

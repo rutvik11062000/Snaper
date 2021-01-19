@@ -3,6 +3,8 @@
    <application
         android:label="snapper"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBPd7tMpFgg8sZ8XOMaQEYd2YX5FXKALEs"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -19,8 +21,7 @@
               android:resource="@style/NormalTheme"
               />
             
-            <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBPd7tMpFgg8sZ8XOMaQEYd2YX5FXKALEs"/>
+            
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
                  screen fades out. A splash screen is useful to avoid any visual

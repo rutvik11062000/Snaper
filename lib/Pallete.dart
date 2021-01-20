@@ -20,3 +20,9 @@ TextStyle titleHeading = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.bold,
 );
+
+TextStyle titleHeadingWhite = TextStyle(
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+  color: white,
+);

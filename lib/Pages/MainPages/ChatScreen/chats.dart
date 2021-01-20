@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:snapper/Pages/AddPage/addPage.dart';
 import 'package:snapper/Pages/MainPages/ChatScreen/chatScreen.dart';
 import 'package:snapper/Pallete.dart';
 import 'package:snapper/UI/ListStyleStatus.dart';
@@ -21,7 +22,7 @@ class Chats extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             forceElevated: false,
-            leadingWidth: 100.0,
+            leadingWidth: 150.0,
             leading: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: AppBarConstWidget(
@@ -139,11 +140,14 @@ class TrailingAppBarChat extends StatelessWidget {
     return Row(
       children: [
         BuildOpacityButton(
+          function: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AddPage(), fullscreenDialog: true)),
           iconData: Icons.person_add_alt_1,
           color: Colors.black45,
         ),
         hspace10,
         BuildOpacityButton(
+          function: () {},
           iconData: Icons.chat_bubble_rounded,
           color: Colors.black45,
         ),

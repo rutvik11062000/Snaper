@@ -21,13 +21,13 @@ class BuildOpacityButton extends StatelessWidget {
     return IconButton(
       onPressed: function,
       icon: CircleAvatar(
-        radius: size ?? 18.0,
+        radius: 30,
         backgroundColor: Colors.transparent.withOpacity(.12),
         child: Center(
           child: Icon(
             iconData,
             color: color ?? white,
-            size: 22,
+            size: 18,
           ),
         ),
       ),

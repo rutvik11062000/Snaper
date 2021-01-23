@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:snapper/Pages/mainPage.dart';
-import 'Pages/MainPages/camera.dart';
+import 'Pages/CameraPage/camera.dart';
 
 import 'Pallete.dart';
 
@@ -36,9 +36,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(
-              // primarySwatch: MaterialColor(Color(0xFFB74093), swatch),
               primaryColor: yellow,
-              // accentColor: Colors.red,
               fontFamily: 'Avenier',
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),

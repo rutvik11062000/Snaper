@@ -1,14 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:snapper/Pages/MainPages/exportPageBundle.dart';
+import 'package:snapper/Pages/CameraPage/imagePreview.dart';
 import 'package:snapper/Pages/MainPages/memories.dart';
 import 'package:snapper/Pages/MainPages/search.dart';
 import 'package:snapper/Pallete.dart';
 import 'package:snapper/UI/shared/AppBarConstWidget.dart';
 import 'package:snapper/UI/shared/CustomCircleAvatarOpacity.dart';
-import 'package:snapper/main.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -36,6 +33,7 @@ class _CameraState extends State<Camera>
 
   bool min = true;
   bool cam = true;
+  XFile imageFile;
   CameraController controller;
 
   @override
@@ -54,7 +52,6 @@ class _CameraState extends State<Camera>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // App state changed before we got the chance to initialize.
     if (controller == null || !controller.value.isInitialized) {
       return;
     }
@@ -70,75 +67,9 @@ class _CameraState extends State<Camera>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.camera_alt),
-      //   // Provide an onPressed callback.
-      //   onPressed: () async {
-      //     try {
-      //       await _initializeControllerFuture;
-      //       final path = join(
-      //         (await getTemporaryDirectory()).path,
-      //         '${DateTime.now()}.png',
-      //       );
-      //       await _controller.takePicture(path);
-      //     } catch (e) {
-      //       print(e);
-      //     }
-      //   },
-      // ),
       body: Stack(
         children: [
           buildGestureDetector(context),
-          // FutureBuilder<void>(
-          //   future: _initializeControllerFuture,
-          //   builder: (context, snapshot) {
-          //     if (snapshot.connectionState == ConnectionState.done) {
-          //       // If the Future is complete, display the preview.
-          //       return GestureDetector(
-          //         onDoubleTap: () {
-          //           setState(() {
-          //             cam = !cam;
-          //           });
-          //           onNewCameraSelected(cameras.first);
-          //         },
-          //         // onVerticalDragUpdate: (DragUpdateDetails details) {
-          //         //   print(details);
-          //         //   _createRoute();
-          //         // },
-          //         onPanUpdate: (details) {
-          //           if (details.delta.dy < -10) {
-          //             print(details.delta.dy);
-          //             // Navigator.push(context, _createRoute());
-          //             print("upp");
-          //             print(controller.value.aspectRatio);
-          //           }
-          //           if (details.delta.dy > 10) {
-          //             print(details.delta.dy);
-          //             // Navigator.push(
-          //             //     context,
-          //             //     MaterialPageRoute(
-          //             //       fullscreenDialog: true,
-          //             //       builder: (context) => Search(),
-          //             //     ));
-          //             Navigator.push(context, _createRoute1());
-          //             print("upp");
-          //           }
-          //         },
-          //         child: Transform.scale(
-          //           scale: 1 / controller.value.aspectRatio,
-          //           child: AspectRatio(
-          //               aspectRatio: controller.value.aspectRatio,
-          //               child: CameraPreview(controller)),
-          //         ),
-          //       );
-          //     } else {
-          //       // Otherwise, display a loading indicator.
-          //       return Container(
-          //         color: Colors.black,
-          //       );
-          //     }
-          //   },
-          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SafeArea(
@@ -212,16 +143,36 @@ class _CameraState extends State<Camera>
                 children: [
                   BuildOpacityButton(iconData: Icons.card_giftcard_rounded),
                   hspace10,
-                  Container(
-                    width: 90,
-                    height: 90,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: white,
-                        width: 4.0,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(100),
+                  GestureDetector(
+                    onTap: () async {
+                      try {
+                        imageFile = await controller.takePicture();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                            return ImagePreview(
+                              xFile: imageFile,
+                              aspectRatio: controller.value.aspectRatio,
+                              ifFrontCamera:
+                                  controller.description != cameras.first,
+                            );
+                          }),
+                        );
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                    child: Container(
+                      width: 90,
+                      height: 90,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: white,
+                          width: 4.0,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(100),
+                        ),
                       ),
                     ),
                   ),
@@ -286,28 +237,10 @@ class _CameraState extends State<Camera>
               controller.description == cameras[0] ? cameras[1] : cameras[0]);
           // print(cameras);
         },
-        onVerticalDragUpdate: (DragUpdateDetails details) {
-          print(details);
-          _createRoute();
-        },
         onPanUpdate: (details) {
-          if (details.delta.dy < -10) {
-            print(details.delta.dy);
-            // Navigator.push(context, _createRoute());
-            print("upp");
-            print(controller.value.aspectRatio);
-          }
-          if (details.delta.dy > 10) {
-            print(details.delta.dy);
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       fullscreenDialog: true,
-            //       builder: (context) => Search(),
-            //     ));
-            Navigator.push(context, _createRoute1());
-            print("upp");
-          }
+          if (details.delta.dy < -10) Navigator.push(context, _createRoute());
+
+          if (details.delta.dy > 10) Navigator.push(context, _createRoute1());
         },
         child: Transform.scale(
           scale: 1 / controller.value.aspectRatio,

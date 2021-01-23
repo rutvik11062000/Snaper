@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:snapper/Pallete.dart';
 import 'MainPages/exportPageBundle.dart';
@@ -13,7 +12,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _page = 1;
   PageController _c;
-  // C
 
   @override
   void initState() {
@@ -69,7 +67,6 @@ class _MainPageState extends State<MainPage> {
       body: PageView(
         physics: new NeverScrollableScrollPhysics(),
         controller: _c,
-        // itemCount: 5,
         onPageChanged: (newPage) {
           setState(() {
             this._page = newPage;

@@ -22,7 +22,7 @@ class BuildOpacityButton extends StatelessWidget {
       onTap: function,
       child: CircleAvatar(
         radius: size ?? 18,
-        backgroundColor: Colors.transparent.withOpacity(.12),
+        backgroundColor: Colors.transparent.withOpacity(.19),
         child: Center(
           child: Icon(
             iconData,

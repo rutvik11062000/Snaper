@@ -13,6 +13,15 @@ Query chatroomsnapshot(String chat_room_key) {
       .orderBy('timestamp', descending: true);
 }
 
+Stream<QuerySnapshot> chatroomsnapsnapshot(String chat_room_key) {
+  return FirebaseFirestore.instance
+      .collection('chats')
+      .doc(chat_room_key)
+      .collection('snaps')
+      .where('seen', isEqualTo: false)
+      .snapshots();
+}
+
 Stream<DocumentSnapshot> userSnapshot() {
   return FirebaseFirestore.instance.collection('user').doc('USER1').snapshots();
 }

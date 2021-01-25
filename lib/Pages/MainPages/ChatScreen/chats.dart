@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:snapper/Pages/AddPage/addPage.dart';
@@ -26,7 +27,7 @@ class Chats extends StatelessWidget {
             leading: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: AppBarConstWidget(
-                specificColor: loadingColor,
+                specificColor: white,
               ),
             ),
             backgroundColor: Colors.white,
@@ -82,50 +83,69 @@ class ChatListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ListStyleStatus listStyleStatus = getListStyleStatus(status);
-    return ListTile(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => ChatScreen(
-                    chat_room_key: chat_room_key,
-                  ))),
-      leading: CircleAvatar(
-        radius: 25.0,
-      ),
-      title: Text(
-        "Person Name",
-        style: TextStyle(
-            fontWeight: FontWeight.w800, fontSize: 15.0, color: Colors.black87),
-      ),
-      subtitle: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Icon(
-            listStyleStatus.squareIcon ?? FontAwesomeIcons.square,
-            color: listStyleStatus.squareColor ?? Colors.black45,
-            size: 10.5,
-          ),
-          hspace5,
-          Text(
-            listStyleStatus.text ?? "Received",
-            style: TextStyle(
-              color: listStyleStatus.fontColor ?? Colors.grey,
-              fontSize: 10.5,
-              fontWeight: FontWeight.w600,
+    return StreamBuilder<QuerySnapshot>(
+      stream: chatroomsnapsnapshot(chat_room_key),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        // print(snapshot.data.docs[0].get('seen'));
+        return ListTile(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => snapshot.data.docs.length > 0
+                  ? SnapViewer(
+                      img_src: snapshot.data.docs[0].get('image_src'),
+                    )
+                  : ChatScreen(
+                      chat_room_key: chat_room_key,
+                    ),
             ),
           ),
-        ],
-      ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 0.0),
-      trailing: Transform(
-        transform: Matrix4.rotationY(math.pi),
-        child: Icon(
-          Icons.chat_bubble_outline,
-          color: Colors.black45,
-          size: 18.0,
-        ),
-      ),
+          leading: CircleAvatar(
+            radius: 25.0,
+          ),
+          title: Text(
+            "Person Name",
+            style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 15.0,
+                color: Colors.black87),
+          ),
+          subtitle: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              snapshot.data.docs.length > 0
+                  ? Icon(
+                      newSnap.squareIcon,
+                      color: newSnap.squareColor,
+                      size: 16.0,
+                    )
+                  : Icon(listStyleStatus.squareIcon),
+              hspace5,
+              Text(
+                snapshot.data.docs.length > 0 && snapshot.data.docs[0]['seen']
+                    ? "connect"
+                    : "not connect",
+                style: TextStyle(
+                  color: listStyleStatus.fontColor ?? Colors.grey,
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 0.0),
+          trailing: Transform(
+            transform: Matrix4.rotationY(math.pi),
+            child: Icon(
+              Icons.chat_bubble_outline,
+              color: Colors.black45,
+              size: 18.0,
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -143,16 +163,34 @@ class TrailingAppBarChat extends StatelessWidget {
           function: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => AddPage(), fullscreenDialog: true)),
           iconData: Icons.person_add_alt_1,
-          color: Colors.black45,
+          color: white,
         ),
         hspace10,
         BuildOpacityButton(
           function: () {},
           iconData: Icons.chat_bubble_rounded,
-          color: Colors.black45,
+          color: white,
         ),
         hspace10,
       ],
+    );
+  }
+}
+
+class SnapViewer extends StatelessWidget {
+  final String img_src;
+  const SnapViewer({Key key, this.img_src}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: FittedBox(
+            fit: BoxFit.cover,
+            child: Image.network(img_src)) /* add child content here */,
+      ),
     );
   }
 }

@@ -27,6 +27,7 @@ dependencies:
   cloud_firestore: ^0.16.0
   cupertino_icons: ^1.0.1
   firebase_core: ^0.7.0
+  firebase_storage: ^7.0.0
   flutter_svg: ^0.19.2+1
   font_awesome_flutter: ^8.11.0
   google_maps_flutter: ^1.1.1

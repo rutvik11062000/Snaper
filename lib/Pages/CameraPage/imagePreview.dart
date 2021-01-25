@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:snapper/services/storageServices.dart';
 
 class ImagePreview extends StatelessWidget {
   final bool ifFrontCamera;
@@ -14,6 +15,13 @@ class ImagePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          String getDownlodURL = await uplodSnapToFirebase(xFile);
+          // print('printing');
+          print(getDownlodURL);
+        },
+      ),
       body: ifFrontCamera
           ? Transform(
               alignment: Alignment.center,

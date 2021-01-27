@@ -12,6 +12,10 @@ const SizedBox hspace5 = SizedBox(
   width: 5.0,
 );
 
+const SizedBox vspace5 = SizedBox(
+  height: 5.0,
+);
+
 const SizedBox hspace10 = SizedBox(
   width: 10.0,
 );
@@ -25,4 +29,13 @@ TextStyle titleHeadingWhite = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.bold,
   color: white,
+);
+
+TextStyle normalHeading = TextStyle(
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle subtitleHeading = TextStyle(
+  fontSize: 14.0,
 );

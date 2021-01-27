@@ -119,9 +119,12 @@ class ChatListTile extends StatelessWidget {
                   ? Icon(
                       newSnap.squareIcon,
                       color: newSnap.squareColor,
-                      size: 16.0,
+                      size: 12.0,
                     )
-                  : Icon(listStyleStatus.squareIcon),
+                  : Icon(
+                      listStyleStatus.squareIcon,
+                      size: 12.0,
+                    ),
               hspace5,
               Text(
                 snapshot.data.docs.length > 0 && snapshot.data.docs[0]['seen']
